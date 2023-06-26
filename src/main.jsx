@@ -6,7 +6,7 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div className=" bg-stone-400">
+    <div className=" bg-stone-400 ">
       <Navbar />
       <App />
     </div>

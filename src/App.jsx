@@ -23,7 +23,7 @@ function App() {
   };
 
   return (
-    <div className="flex justify-center items-center flex-col h-screen">
+    <div className="flex justify-center items-center flex-col ">
       <div className="flex justify-center items-center flex-col mb-4">
         <input
           type="text"
@@ -47,7 +47,7 @@ function App() {
             return (
               <div
                 key={book.id}
-                className="bg-slate-500 p-6 m-4 rounded-lg max-w-md"
+                className="bg-slate-500 p-6 m-4 rounded-lg max-w-md shadow-lg"
               >
                 <h2 className="text-lg font-bold mb-4">
                   {book.volumeInfo.title}
