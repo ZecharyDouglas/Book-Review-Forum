@@ -12,7 +12,7 @@ function App() {
   const getBookData = () => {
     axios
       .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${userSearch}:keyes&key=AIzaSyDOCTr0pSwfrXwBbSzG3rNX82-LFD-pwf0`
+        `https://www.googleapis.com/books/v1/volumes?q=${userSearch}:keyes&key=KEY_GOES_HERE`
       )
       .then((response) => {
         setBookData(response.data.items);
