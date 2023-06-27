@@ -5,6 +5,11 @@ import axios from "axios";
 function App() {
   const [bookData, setBookData] = useState([]);
   const [userSearch, setUserSearch] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
   const handleUserSearch = (e) => {
     setUserSearch(e.target.value);
   };
@@ -25,6 +30,16 @@ function App() {
   return (
     <div className="flex justify-center items-center flex-col ">
       <div className="flex justify-center items-center flex-col mb-4">
+        <div className=" flex m-5">
+          <p className=" mr-4">Search Options:</p>
+          <select value={selectedOption} onChange={handleSelectChange}>
+            <option value="">Select an option</option>
+            <option value="title">Title</option>
+            <option value="author">Author</option>
+            <option value="publisher">Publisher</option>
+          </select>
+        </div>
+
         <input
           type="text"
           name=""
