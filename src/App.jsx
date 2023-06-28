@@ -5,20 +5,48 @@ import axios from "axios";
 function App() {
   const [bookData, setBookData] = useState([]);
   const [userSearch, setUserSearch] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState();
+  const [userQuery, setUserQuery] = useState("");
+  // build out the query string in a function
+
+  // move the search bar and display into a different component
+  // build out a form for the user to review the book
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
+    console.log(selectedOption);
+    console.log(typeof selectedOption);
+    switch (+selectedOption) {
+      case 3:
+        setUserQuery("intitle:");
+
+        break;
+      case 1:
+        setUserQuery("inauthor:");
+
+        break;
+      case 2:
+        setUserQuery("subject:");
+
+        break;
+
+      default:
+        break;
+    }
+    console.log(userQuery);
   };
   const handleUserSearch = (e) => {
-    setUserSearch(e.target.value);
+    const newString = e.target.value.replace(/ /g, "+");
+    setUserSearch(newString);
   };
 
   const getBookData = () => {
+    let urlLink = `https://www.googleapis.com/books/v1/volumes?q=${userQuery}${userSearch}`;
+    //                 https://www.googleapis.com/books/v1/volumes?q=intitle:Harry+Potter
+
+    console.log(urlLink);
     axios
-      .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${userSearch}:keyes&key=KEY_GOES_HERE`
-      )
+      .get(urlLink)
       .then((response) => {
         setBookData(response.data.items);
       })
@@ -33,10 +61,10 @@ function App() {
         <div className=" flex m-5">
           <p className=" mr-4">Search Options:</p>
           <select value={selectedOption} onChange={handleSelectChange}>
-            <option value="">Select an option</option>
-            <option value="title">Title</option>
-            <option value="author">Author</option>
-            <option value="publisher">Publisher</option>
+            <option value={0}>Select an option</option>
+            <option value={1}>Title</option>
+            <option value={2}>Author</option>
+            <option value={3}>Subject</option>
           </select>
         </div>
 
@@ -57,7 +85,7 @@ function App() {
       </div>
 
       {bookData.length > 0 ? (
-        <div className="flex justify-center items-center flex-col">
+        <div className="flex justify-center items-center flex-col w-fit">
           {bookData.map((book) => {
             return (
               <div
