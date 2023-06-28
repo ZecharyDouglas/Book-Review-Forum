@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ShowBooks from "./ShowBooks";
+import ReviewForm from "./ReviewForm";
 
 function App() {
   const [bookData, setBookData] = useState([]);
@@ -90,6 +91,14 @@ function App() {
       ) : (
         <div className="flex justify-center items-center flex-col">
           Loading Please Wait...{" "}
+        </div>
+      )}
+
+      {bookData.length > 0 ? (
+        <ReviewForm book={bookData[0]} />
+      ) : (
+        <div className="flex justify-center items-center flex-col">
+          Try Reviewing a Book!
         </div>
       )}
     </div>
