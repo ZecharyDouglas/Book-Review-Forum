@@ -58,7 +58,7 @@ function App() {
   };
 
   return (
-    <div className="flex justify-center items-center flex-col ">
+    <div className="flex justify-start h-[2300px]  items-center flex-col ">
       <div className="flex justify-center items-center flex-col mb-4">
         <div className=" flex m-5">
           <p className=" mr-4">Search Options:</p>
