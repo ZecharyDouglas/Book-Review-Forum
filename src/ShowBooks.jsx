@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function ShowBooks({ bookData }) {
+export default function ShowBooks({ bookData, onReviewClick }) {
+  const handleBookClick = (book) => {
+    onReviewClick(); // Call the onReviewClick function passed from the parent component
+  };
+
   return (
     <div className="flex justify-center items-center flex-col w-fit">
       {bookData.map((book) => {
@@ -8,6 +12,7 @@ export default function ShowBooks({ bookData }) {
           <div
             key={book.id}
             className="bg-slate-200 p-6 m-4 rounded-lg max-w-md shadow-lg"
+            onClick={() => handleBookClick(book)} // Call handleBookClick when a book is clicked
           >
             <h2 className="text-lg font-bold mb-4">{book.volumeInfo.title}</h2>
             <p className="mb-2">

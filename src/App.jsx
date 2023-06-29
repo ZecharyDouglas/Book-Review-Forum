@@ -9,30 +9,25 @@ function App() {
   const [userSearch, setUserSearch] = useState("");
   const [selectedOption, setSelectedOption] = useState();
   const [userQuery, setUserQuery] = useState("");
+  const [showReviewForm, setShowReviewForm] = useState(false);
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
-    console.log(selectedOption);
-    console.log(typeof selectedOption);
     switch (+selectedOption) {
       case 3:
         setUserQuery("intitle:");
-
         break;
       case 1:
         setUserQuery("inauthor:");
-
         break;
       case 2:
         setUserQuery("subject:");
-
         break;
-
       default:
         break;
     }
-    console.log(userQuery);
   };
+
   const handleUserSearch = (e) => {
     const newString = e.target.value.replace(/ /g, "+");
     setUserSearch(newString);
@@ -40,7 +35,6 @@ function App() {
 
   const getBookData = () => {
     let urlLink = `https://www.googleapis.com/books/v1/volumes?q=${userQuery}${userSearch}&maxResults=5`;
-    //                 https://www.googleapis.com/books/v1/volumes?q=intitle:Harry+Potter
     axios
       .get(urlLink)
       .then((response) => {
@@ -49,11 +43,24 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
-    console.log(bookData[0]);
   };
+
+  const handleReviewClick = () => {
+    setShowReviewForm(true);
+  };
+
+  useEffect(() => {
+    if (bookData.length > 0) {
+      setShowReviewForm(false);
+    }
+  }, [bookData]);
 
   return (
     <div className="flex justify-start h-[2300px] items-center flex-col ">
+      {showReviewForm && bookData.length > 0 && (
+        <ReviewForm book={bookData[0]} />
+      )}
+
       <div className="flex justify-center items-center flex-col mb-4 w-[1000px]">
         <div className=" flex m-5">
           <p className=" mr-4">Search Options:</p>
@@ -82,16 +89,16 @@ function App() {
       </div>
 
       {bookData.length > 0 ? (
-        <ShowBooks bookData={bookData} />
+        <div className={showReviewForm ? "blur" : ""}>
+          <ShowBooks bookData={bookData} onReviewClick={handleReviewClick} />
+        </div>
       ) : (
         <div className="flex justify-center items-center flex-col">
-          Loading Please Wait...{" "}
+          Loading Please Wait...
         </div>
       )}
 
-      {bookData.length > 0 ? (
-        <ReviewForm book={bookData[0]} />
-      ) : (
+      {!showReviewForm && bookData.length > 0 && (
         <div className="flex justify-center items-center flex-col">
           Try Reviewing a Book!
         </div>
