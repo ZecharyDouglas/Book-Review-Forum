@@ -7,7 +7,7 @@ export default function ShowBooks({ bookData }) {
         return (
           <div
             key={book.id}
-            className="bg-slate-500 p-6 m-4 rounded-lg max-w-md shadow-lg"
+            className="bg-slate-200 p-6 m-4 rounded-lg max-w-md shadow-lg"
           >
             <h2 className="text-lg font-bold mb-4">{book.volumeInfo.title}</h2>
             <p className="mb-2">

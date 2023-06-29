@@ -9,10 +9,6 @@ function App() {
   const [userSearch, setUserSearch] = useState("");
   const [selectedOption, setSelectedOption] = useState();
   const [userQuery, setUserQuery] = useState("");
-  // build out the query string in a function
-
-  // move the search bar and display into a different component
-  // build out a form for the user to review the book
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
@@ -58,8 +54,8 @@ function App() {
   };
 
   return (
-    <div className="flex justify-start h-[2300px]  items-center flex-col ">
-      <div className="flex justify-center items-center flex-col mb-4">
+    <div className="flex justify-start h-[2300px] items-center flex-col ">
+      <div className="flex justify-center items-center flex-col mb-4 w-[1000px]">
         <div className=" flex m-5">
           <p className=" mr-4">Search Options:</p>
           <select value={selectedOption} onChange={handleSelectChange}>
@@ -79,7 +75,7 @@ function App() {
           className="p-2 border border-gray-300 rounded"
         />
         <button
-          className="px-4 py-2 bg-blue-500 text-white border-2 rounded-lg"
+          className="px-4 py-2 bg-blue-500 text-white border-2 rounded-lg mt-5"
           onClick={getBookData}
         >
           Search
