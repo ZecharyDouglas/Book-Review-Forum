@@ -41,8 +41,6 @@ function App() {
   const getBookData = () => {
     let urlLink = `https://www.googleapis.com/books/v1/volumes?q=${userQuery}${userSearch}&maxResults=5`;
     //                 https://www.googleapis.com/books/v1/volumes?q=intitle:Harry+Potter
-
-    console.log(urlLink);
     axios
       .get(urlLink)
       .then((response) => {
@@ -51,6 +49,7 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
+    console.log(bookData[0]);
   };
 
   return (

@@ -11,19 +11,21 @@ export default function ReviewForm({ book }) {
   return (
     <form
       onSubmit={handleAddJobFormSubmit}
-      className=" bg-slate-200 rounded-md p-6 w-500 selection:bg-blue-200 flex flex-col gap-2  m-6"
+      className=" bg-slate-200 rounded-md p-6 w-500 selection:bg-blue-200 flex flex-col gap-2 shadow-lg m-6"
     >
-      <h1 className="flex justify-center">Add Book Review for ${book.title}</h1>
+      <h1 className="flex justify-center">
+        Add Book Review for&nbsp;{" "}
+        <span className="text-blue-300">{book.volumeInfo.title}</span>
+      </h1>
 
       <fieldset className="flex flex-col">
-        <label htmlFor="title">{book.title}</label>
         <textarea
           className=" rounded-md"
           onChange={handleInputChange}
           value={userReview}
           name="userReview"
           id="userReview"
-          cols="50"
+          cols="70"
           rows="10"
           placeholder="Enter your review here...."
         ></textarea>
