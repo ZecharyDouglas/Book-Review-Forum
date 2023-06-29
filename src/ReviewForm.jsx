@@ -4,19 +4,29 @@ import { useState } from "react";
 export default function ReviewForm({ book }) {
   const [userReview, setuserReview] = useState();
   const handleInputChange = (e) => {
+    e.preventDefault();
     setuserReview(e.target.value);
   };
+  const [getLength, setgetLength] = useState();
 
-  const handleAddJobFormSubmit = () => {
-    axios.post({
-      method: "post",
-      url: "http://localhost:3000/comments",
-      data: {
-        id: book.volumeInfo.industryIdentifiers[0].identifier,
-        body: userReview,
-        postId: book.volumeInfo.industryIdentifiers[0].identifier,
-      },
-    });
+  const handleAddJobFormSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      await axios
+        .get("http://localhost:3000/comments")
+        .then((res) => setgetLength(res.data.length));
+      await axios({
+        method: "post",
+        url: "http://localhost:3000/comments",
+        data: {
+          id: getLength + 1,
+          body: userReview,
+          bookId: book.volumeInfo.industryIdentifiers[0].identifier,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <form
