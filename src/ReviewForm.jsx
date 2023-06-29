@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
 export default function ReviewForm({ book }) {
@@ -7,7 +8,15 @@ export default function ReviewForm({ book }) {
   };
 
   const handleAddJobFormSubmit = () => {
-    return;
+    axios.post({
+      method: "post",
+      url: "http://localhost:3000/comments",
+      data: {
+        id: book.volumeInfo.industryIdentifiers[0].identifier,
+        body: userReview,
+        postId: book.volumeInfo.industryIdentifiers[0].identifier,
+      },
+    });
   };
   return (
     <form
