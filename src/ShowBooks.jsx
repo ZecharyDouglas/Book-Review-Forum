@@ -11,7 +11,7 @@ export default function ShowBooks({ bookData, onReviewClick }) {
         return (
           <div
             key={book.id}
-            className="bg-slate-200 p-6 m-4 rounded-lg max-w-md shadow-lg"
+            className="bg-stone-200 p-6 m-4 rounded-lg max-w-md shadow-lg"
             onClick={() => handleBookClick(book)} // Call handleBookClick when a book is clicked
           >
             <h2 className="text-lg font-bold mb-4">{book.volumeInfo.title}</h2>
