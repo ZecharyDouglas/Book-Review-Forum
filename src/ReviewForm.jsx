@@ -19,7 +19,6 @@ export default function ReviewForm({ book }) {
         method: "post",
         url: "http://localhost:3000/comments",
         data: {
-          id: getLength + 1,
           body: userReview,
           bookId: book.volumeInfo.industryIdentifiers[0].identifier,
         },
