@@ -7,12 +7,13 @@ import ReviewForm from "./ReviewForm";
 function App() {
   const [bookData, setBookData] = useState([]);
   const [userSearch, setUserSearch] = useState("");
-  const [selectedOption, setSelectedOption] = useState();
+  const [selectedOption, setSelectedOption] = useState(0);
   const [userQuery, setUserQuery] = useState("");
   const [showReviewForm, setShowReviewForm] = useState(false);
 
   const handleSelectChange = (event) => {
-    setSelectedOption(event.target.value);
+    setSelectedOption(dropdown.value);
+
     switch (+selectedOption) {
       case 3:
         setUserQuery("intitle:");
@@ -35,6 +36,7 @@ function App() {
 
   const getBookData = () => {
     let urlLink = `https://www.googleapis.com/books/v1/volumes?q=${userQuery}${userSearch}&maxResults=5`;
+    console.log(urlLink);
     axios
       .get(urlLink)
       .then((response) => {
@@ -64,7 +66,7 @@ function App() {
       <div className="flex justify-center items-center flex-col mb-4 w-[1000px]">
         <div className=" flex m-5">
           <p className=" mr-4">Search Options:</p>
-          <select value={selectedOption} onChange={handleSelectChange}>
+          <select id="dropdown" onChange={handleSelectChange}>
             <option value={0}>Select an option</option>
             <option value={1}>Title</option>
             <option value={2}>Author</option>
