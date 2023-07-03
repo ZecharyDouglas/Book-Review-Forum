@@ -4,14 +4,12 @@ import { useState } from "react";
 export default function ReviewForm({ book }) {
   const [userReview, setuserReview] = useState();
   const handleInputChange = (e) => {
-    e.preventDefault();
     setuserReview(e.target.value);
   };
   const [getLength, setgetLength] = useState();
 
   const handleAddJobFormSubmit = async (e) => {
     try {
-      e.preventDefault();
       await axios
         .get("http://localhost:3000/comments")
         .then((res) => setgetLength(res.data.length));

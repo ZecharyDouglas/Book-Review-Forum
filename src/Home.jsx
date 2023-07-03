@@ -7,38 +7,37 @@ import ReviewForm from "./ReviewForm";
 function App() {
   const [bookData, setBookData] = useState([]);
   const [userSearch, setUserSearch] = useState("");
-  const [selectedOption, setSelectedOption] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(1);
   const [userQuery, setUserQuery] = useState("");
   const [showReviewForm, setShowReviewForm] = useState(false);
 
   const handleSelectChange = (event) => {
-    setSelectedOption(dropdown.value);
+    const selectedValue = event.target.value;
+    setSelectedOption(selectedValue);
+    console.log(selectedValue);
 
-    switch (+selectedOption) {
-      case 3:
-        setUserQuery("intitle:");
-        break;
-      case 1:
-        setUserQuery("inauthor:");
-        break;
-      case 2:
-        setUserQuery("subject:");
-        break;
-      default:
-        break;
+    if (selectedValue == 1) {
+      setUserQuery("intitle:");
+    }
+    if (selectedValue == 2) {
+      setUserQuery("inauthor:");
+    }
+    if (selectedValue == 3) {
+      setUserQuery("subject:");
     }
   };
 
   const handleUserSearch = (e) => {
     const newString = e.target.value.replace(/ /g, "+");
+
     setUserSearch(newString);
   };
 
   const getBookData = () => {
-    let urlLink = `https://www.googleapis.com/books/v1/volumes?q=${userQuery}${userSearch}&maxResults=5`;
-    console.log(urlLink);
     axios
-      .get(urlLink)
+      .get(
+        `https://www.googleapis.com/books/v1/volumes?q=${userQuery}${userSearch}&maxResults=5`
+      )
       .then((response) => {
         setBookData(response.data.items);
       })
