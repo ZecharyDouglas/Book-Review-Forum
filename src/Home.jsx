@@ -50,6 +50,10 @@ function App() {
     setShowReviewForm(true);
   };
 
+  const handleCloseForm = () => {
+    setShowReviewForm(false);
+  };
+
   useEffect(() => {
     if (bookData.length > 0) {
       setShowReviewForm(false);
@@ -59,7 +63,7 @@ function App() {
   return (
     <div className="flex justify-start h-[2300px] items-center flex-col ">
       {showReviewForm && bookData.length > 0 && (
-        <ReviewForm book={bookData[0]} />
+        <ReviewForm book={bookData[0]} onClose={handleCloseForm} />
       )}
 
       <div className="flex justify-center items-center flex-col mb-4 w-[1000px]">
