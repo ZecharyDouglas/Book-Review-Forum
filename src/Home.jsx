@@ -98,9 +98,7 @@ function App() {
           <ShowBooks bookData={bookData} onReviewClick={handleReviewClick} />
         </div>
       ) : (
-        <div className="flex justify-center items-center flex-col">
-          Loading Please Wait...
-        </div>
+        <div className="flex justify-center items-center flex-col"></div>
       )}
 
       {!showReviewForm && bookData.length > 0 && (

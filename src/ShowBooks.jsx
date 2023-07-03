@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ShowBooks({ bookData, onReviewClick }) {
   const handleBookClick = (book) => {
-    onReviewClick(); // Call the onReviewClick function passed from the parent component
+    onReviewClick();
   };
 
   return (
@@ -12,7 +12,7 @@ export default function ShowBooks({ bookData, onReviewClick }) {
           <div
             key={book.id}
             className="bg-stone-200 p-6 m-4 rounded-lg max-w-md shadow-lg hover:bg-stone-300 cursor-pointer"
-            onClick={() => handleBookClick(book)} // Call handleBookClick when a book is clicked
+            onClick={() => handleBookClick(book)}
           >
             <h2 className="text-lg font-bold mb-4">{book.volumeInfo.title}</h2>
             <p className="mb-2">
