@@ -3,9 +3,15 @@ import React from "react";
 import { useState } from "react";
 export default function ReviewForm({ book }) {
   const [userReview, setuserReview] = useState();
+  const [userName, setUserName] = useState();
+
+  const handleUserName = (e) => {
+    setUserName(e.target.value);
+  };
   const handleInputChange = (e) => {
     setuserReview(e.target.value);
   };
+
   const [getLength, setgetLength] = useState();
 
   const handleAddJobFormSubmit = async (e) => {
@@ -19,6 +25,7 @@ export default function ReviewForm({ book }) {
         data: {
           body: userReview,
           bookId: book.volumeInfo.industryIdentifiers[0].identifier,
+          username: userName,
         },
       });
     } catch (error) {
@@ -34,6 +41,17 @@ export default function ReviewForm({ book }) {
         Add Book Review for&nbsp;{" "}
         <span className="text-blue-300">{book.volumeInfo.title}</span>
       </h1>
+
+      <fieldset className="flex flex-col">
+        <label htmlFor="userName"></label>
+        <input
+          className=" rounded-lg"
+          id="userName"
+          placeholder="Enter your name here..."
+          onChange={handleUserName}
+          type="text"
+        />
+      </fieldset>
 
       <fieldset className="flex flex-col">
         <textarea
