@@ -23,31 +23,17 @@ export default function ShowPosts() {
               className="bg-stone-200 p-6 m-4 rounded-lg max-w-md shadow-lg hover:bg-stone-300 cursor-pointer"
               // onClick={() => handlepostClick(post)} // Call handlepostClick when a post is clicked
             >
-              <h2 className="text-lg font-bold mb-4">
-                {post.volumeInfo.title}
-              </h2>
               <p className="mb-2">
-                <strong>Authors:</strong> {post.volumeInfo.authors?.join(", ")}
+                <strong className=" text-blue-400">
+                  {post.username} said..
+                </strong>
+              </p>
+
+              <p className="mb-2">
+                <strong>Publisher:</strong> {post.date}
               </p>
               <p className="mb-2">
-                <strong>Info Link:</strong>{" "}
-                <a
-                  href={post.volumeInfo.infoLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 underline"
-                >
-                  {post.volumeInfo.infoLink}
-                </a>
-              </p>
-              <p className="mb-2">
-                <strong>Page Count:</strong> {post.volumeInfo.pageCount}
-              </p>
-              <p className="mb-2">
-                <strong>Published Date:</strong> {post.volumeInfo.publishedDate}
-              </p>
-              <p className="mb-2">
-                <strong>Publisher:</strong> {post.volumeInfo.publisher}
+                <strong>Publisher:</strong> {post.body}
               </p>
             </div>
           );

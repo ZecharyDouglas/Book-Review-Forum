@@ -30,9 +30,8 @@ export default function ReviewForm({ book, onClose }) {
       setSubmitted(true);
       setTimeout(() => {
         setSubmitted(false);
-        onClose(); // Close the review form
-      }, 2000);
-      onClose(true);
+        onClose(true);
+      }, 2500);
     } catch (error) {
       console.log(error);
     }
