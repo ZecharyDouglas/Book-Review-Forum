@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import CloseButton from "./UI/CloseButton.png";
 export default function ReviewForm({ book }) {
   const [userReview, setuserReview] = useState();
   const [userName, setUserName] = useState();
@@ -14,7 +15,9 @@ export default function ReviewForm({ book }) {
 
   const [getLength, setgetLength] = useState();
 
-  const handleAddJobFormSubmit = async (e) => {
+  const handleAddPostFormSubmit = async (e) => {
+    e.preventDefault();
+    const dateTime = new Date();
     try {
       await axios
         .get("http://localhost:3000/comments")
@@ -23,9 +26,10 @@ export default function ReviewForm({ book }) {
         method: "post",
         url: "http://localhost:3000/comments",
         data: {
-          body: userReview,
-          bookId: book.volumeInfo.industryIdentifiers[0].identifier,
           username: userName,
+          date: dateTime,
+          bookId: book.volumeInfo.industryIdentifiers[0].identifier,
+          body: userReview,
         },
       });
     } catch (error) {
@@ -34,9 +38,15 @@ export default function ReviewForm({ book }) {
   };
   return (
     <form
-      onSubmit={handleAddJobFormSubmit}
+      onSubmit={handleAddPostFormSubmit}
       className=" bg-slate-200 rounded-md p-6 w-500 selection:bg-blue-200 flex flex-col gap-2 shadow-lg m-6"
     >
+      <div className=" flex justify-end">
+        <button>
+          <img src={CloseButton} alt="A close button" />
+        </button>
+      </div>
+
       <h1 className="flex justify-center">
         Add Book Review for&nbsp;{" "}
         <span className="text-blue-300">{book.volumeInfo.title}</span>
