@@ -18,12 +18,21 @@ export default function ReviewForm({ book, onClose }) {
   const handleAddPostFormSubmit = async (e) => {
     e.preventDefault();
     const dateTime = new Date();
+    const formattedDate = dateTime.toLocaleString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      timeZone: "EST", // Adjust the time zone as per your requirement
+    });
 
     try {
       await axios.get("http://localhost:3000/comments");
       await axios.post("http://localhost:3000/comments", {
         username: userName,
-        date: dateTime,
+        date: formattedDate,
         bookId: book.volumeInfo.industryIdentifiers[0].identifier,
         body: userReview,
       });

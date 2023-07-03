@@ -20,7 +20,7 @@ export default function ShowPosts() {
           return (
             <div
               key={post.id}
-              className="bg-stone-200 p-6 m-4 rounded-lg max-w-md shadow-lg hover:bg-stone-300 cursor-pointer"
+              className="bg-stone-200 p-10 m-4 rounded-lg max-w-md shadow-lg hover:bg-stone-300 cursor-pointer"
               // onClick={() => handlepostClick(post)} // Call handlepostClick when a post is clicked
             >
               <p className="mb-2">
@@ -30,11 +30,9 @@ export default function ShowPosts() {
               </p>
 
               <p className="mb-2">
-                <strong>Publisher:</strong> {post.date}
+                <strong>{post.date}</strong>
               </p>
-              <p className="mb-2">
-                <strong>Publisher:</strong> {post.body}
-              </p>
+              <p className="mb-2 mr-5">{post.body}</p>
             </div>
           );
         })}
