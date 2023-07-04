@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { ChakraProvider } from "@chakra-ui/react";
+
 import Home from "./Home.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
@@ -43,8 +45,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div className=" bg-stone-200">
-      <RouterProvider router={router} />
-    </div>
+    <ChakraProvider>
+      <div className=" bg-stone-200">
+        <RouterProvider router={router} />
+      </div>
+    </ChakraProvider>
   </React.StrictMode>
 );
