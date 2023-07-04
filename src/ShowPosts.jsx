@@ -43,9 +43,10 @@ export default function ShowPosts() {
               <p className="mb-2">
                 <strong>{post.date}</strong>
               </p>
-              <FormControl isDisabled="true">
+              <FormControl>
                 <textarea
-                  className="rounded-md bg-stone-200"
+                  readOnly={true}
+                  className="rounded-md bg-stone-200 focus:outline-none focus:ring-0"
                   value={post.body}
                   name="userReview"
                   id="userReview"
