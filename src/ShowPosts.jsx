@@ -4,6 +4,7 @@ import moreButton from "./UI/moreButton.svg";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import UseAnimations from "react-useanimations";
 import trash2 from "react-useanimations/lib/trash2";
+import { FormControl } from "@chakra-ui/react";
 
 export default function ShowPosts() {
   const [postData, setPostData] = useState();
@@ -42,7 +43,16 @@ export default function ShowPosts() {
               <p className="mb-2">
                 <strong>{post.date}</strong>
               </p>
-              <p className="mb-2 mr-5">{post.body}</p>
+              <FormControl isDisabled="true">
+                <textarea
+                  className="rounded-md bg-stone-200"
+                  value={post.body}
+                  name="userReview"
+                  id="userReview"
+                  cols="50"
+                  rows="10"
+                ></textarea>
+              </FormControl>
             </div>
           );
         })}
