@@ -33,7 +33,7 @@ export default function ShowPosts() {
   return (
     <div className="flex flex-col items-center justify-start h-[2000px]">
       {deleted && (
-        <h1 className="text-green-500 flex justify-center text-3xl">
+        <h1 className="text-green-500 flex justify-center text-xl mt-10">
           Post was sucessfully deleted
         </h1>
       )}
