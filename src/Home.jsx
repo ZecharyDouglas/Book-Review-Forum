@@ -86,7 +86,7 @@ function App() {
           className="p-2 border border-gray-300 rounded"
         />
         <button
-          className="px-4 py-2 bg-blue-500 text-white border-2 rounded-lg mt-5"
+          className="px-4 py-2 bg-blue-500 text-white border-2 rounded-lg mt-5 focus:outline-none focus:ring-0"
           onClick={getBookData}
         >
           Search

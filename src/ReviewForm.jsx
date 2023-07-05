@@ -70,7 +70,7 @@ export default function ReviewForm({ book, onClose }) {
       <fieldset className="flex flex-col">
         <label htmlFor="userName"></label>
         <input
-          className="rounded-lg"
+          className="rounded-lg focus:outline-none focus:ring-0"
           id="userName"
           placeholder="Enter your name here..."
           onChange={handleUserName}
@@ -80,7 +80,7 @@ export default function ReviewForm({ book, onClose }) {
 
       <fieldset className="flex flex-col">
         <textarea
-          className="rounded-md"
+          className="rounded-md focus:outline-none focus:ring-0"
           onChange={handleInputChange}
           value={userReview}
           name="userReview"
