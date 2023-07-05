@@ -24,18 +24,6 @@ export default function Navbar() {
                 >
                   Posts
                 </Link>
-                <Link
-                  to="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Placeholder
-                </Link>
-                <Link
-                  to="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Placeholder
-                </Link>
               </div>
             </div>
           </div>

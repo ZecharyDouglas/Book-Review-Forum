@@ -67,64 +67,67 @@ export default function ShowPosts() {
         </h1>
       )}
       {postData &&
-        postData.map((post) => {
-          return (
-            <div
-              key={post.id}
-              className="bg-stone-200 p-10 mt-20 m-4 rounded-lg max-w-md shadow-lg hover:bg-stone-300 cursor-pointer"
-            >
-              <div className="flex justify-end">
-                <Button
-                  onClick={() => {
-                    editPost(post.id, post.body);
-                  }}
-                  size="sm"
-                >
-                  Edit
-                </Button>
-                <Button
-                  size="sm"
-                  className="ml-5"
-                  onClick={() => deletePost(post.id)}
-                >
-                  <UseAnimations animation={trash2} size={30} />
-                </Button>
-              </div>
-
-              <p className="mb-2">
-                <strong className=" text-blue-400">
-                  {post.username} said..
-                </strong>
-              </p>
-
-              <p className="mb-2">
-                <strong>{post.date}</strong>
-              </p>
-              <FormControl>
-                {editingPostId === post.id ? (
-                  <textarea
-                    className="rounded-md bg-stone-200 focus:outline-none focus:ring-0"
-                    value={postBody}
-                    onChange={handlePostEdit}
-                    name="userReview"
-                    id="userReview"
-                    cols="50"
-                    rows="10"
-                  ></textarea>
-                ) : (
-                  <p>{post.body}</p>
-                )}
-              </FormControl>
-              {editingPostId === post.id ? (
-                <div className="flex justify-center">
-                  <Button onClick={updatePost} colorScheme="teal" size="sm">
-                    Update Post
+        postData
+          .slice()
+          .reverse()
+          .map((post) => {
+            return (
+              <div
+                key={post.id}
+                className="bg-stone-200 p-10 mt-20 m-4 rounded-lg max-w-md shadow-lg hover:bg-stone-300 cursor-pointer"
+              >
+                <div className="flex justify-end">
+                  <Button
+                    onClick={() => {
+                      editPost(post.id, post.body);
+                    }}
+                    size="sm"
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    size="sm"
+                    className="ml-5"
+                    onClick={() => deletePost(post.id)}
+                  >
+                    <UseAnimations animation={trash2} size={20} />
                   </Button>
                 </div>
-              ) : null}
-            </div>
-          );
-        })}
+
+                <p className="mb-2">
+                  <strong className=" text-blue-400">
+                    {post.username} said..
+                  </strong>
+                </p>
+
+                <p className="mb-2">
+                  <strong>{post.date}</strong>
+                </p>
+                <FormControl>
+                  {editingPostId === post.id ? (
+                    <textarea
+                      className="rounded-md bg-stone-200 focus:outline-none focus:ring-0"
+                      value={postBody}
+                      onChange={handlePostEdit}
+                      name="userReview"
+                      id="userReview"
+                      cols="50"
+                      rows="10"
+                    ></textarea>
+                  ) : (
+                    <p>{post.body}</p>
+                  )}
+                </FormControl>
+                {editingPostId === post.id ? (
+                  <div className="flex justify-center">
+                    <Button onClick={updatePost} colorScheme="teal" size="sm">
+                      Update Post
+                    </Button>
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
     </div>
   );
 }
