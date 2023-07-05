@@ -8,6 +8,7 @@ import { FormControl } from "@chakra-ui/react";
 
 export default function ShowPosts() {
   const [postData, setPostData] = useState();
+  const [deleted, setDeleted] = useState(false);
 
   useEffect(() => {
     axios({
@@ -16,10 +17,26 @@ export default function ShowPosts() {
     }).then((res) => setPostData(res.data));
 
     console.table(postData);
-  }, []);
+  }, [deleted]);
+
+  function deletePost(params) {
+    event.preventDefault();
+    axios.delete(`http://localhost:3000/comments/${params}`).then((res) => {
+      console.log(res);
+    });
+    setDeleted(true);
+    setTimeout(() => {
+      setDeleted(false);
+    }, 2500);
+  }
 
   return (
     <div className="flex flex-col items-center justify-start h-[2000px]">
+      {deleted && (
+        <h1 className="text-green-500 flex justify-center text-3xl">
+          Post was sucessfully deleted
+        </h1>
+      )}
       {postData &&
         postData.map((post) => {
           return (
@@ -30,10 +47,15 @@ export default function ShowPosts() {
             >
               <div className="flex justify-end">
                 <Button size="sm">Edit</Button>
-                <Button size="sm" className="ml-5">
+                <Button
+                  size="sm"
+                  className="ml-5"
+                  onClick={() => deletePost(post.id)}
+                >
                   <UseAnimations animation={trash2} size={30} />
                 </Button>
               </div>
+
               <p className="mb-2">
                 <strong className=" text-blue-400">
                   {post.username} said..
