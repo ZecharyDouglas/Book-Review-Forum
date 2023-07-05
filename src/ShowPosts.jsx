@@ -7,28 +7,57 @@ import trash2 from "react-useanimations/lib/trash2";
 import { FormControl } from "@chakra-ui/react";
 
 export default function ShowPosts() {
-  const [postData, setPostData] = useState();
+  const [postData, setPostData] = useState([]);
   const [deleted, setDeleted] = useState(false);
+  const [editingPostId, setEditingPostId] = useState(null);
+  const [postBody, setPostBody] = useState("");
+  const [editState, setEditState] = useState(false);
+  const [updated, setUpdated] = useState(false);
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: "http://localhost:3000/comments",
-    }).then((res) => setPostData(res.data));
-
-    console.table(postData);
-  }, [deleted]);
-
-  function deletePost(params) {
-    event.preventDefault();
-    axios.delete(`http://localhost:3000/comments/${params}`).then((res) => {
-      console.log(res);
+    axios.get("http://localhost:3000/comments").then((res) => {
+      setPostData(res.data);
+      console.table(res.data);
     });
-    setDeleted(true);
+  }, [deleted, updated]);
+
+  function deletePost(id) {
+    axios.delete(`http://localhost:3000/comments/${id}`).then((res) => {
+      console.log(res);
+      setDeleted(true);
+    });
     setTimeout(() => {
       setDeleted(false);
     }, 2500);
   }
+
+  function editPost(id, body) {
+    setEditState(!editState);
+    if (editState) {
+      setEditingPostId(id);
+      setPostBody(body);
+    } else setEditingPostId(null);
+  }
+
+  function handlePostEdit(e) {
+    setPostBody(e.target.value);
+  }
+  const updatePost = () => {
+    try {
+      axios({
+        method: "patch",
+        url: `http://localhost:3000/comments/${editingPostId}`,
+        data: { body: postBody },
+      }).then((res) => {
+        console.log(res);
+        setUpdated(true);
+        setEditingPostId(null);
+        setPostBody("");
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-start h-[2000px]">
@@ -43,10 +72,16 @@ export default function ShowPosts() {
             <div
               key={post.id}
               className="bg-stone-200 p-10 mt-20 m-4 rounded-lg max-w-md shadow-lg hover:bg-stone-300 cursor-pointer"
-              // onClick={() => handlepostClick(post)} // Call handlepostClick when a post is clicked
             >
               <div className="flex justify-end">
-                <Button size="sm">Edit</Button>
+                <Button
+                  onClick={() => {
+                    editPost(post.id, post.body);
+                  }}
+                  size="sm"
+                >
+                  Edit
+                </Button>
                 <Button
                   size="sm"
                   className="ml-5"
@@ -66,16 +101,27 @@ export default function ShowPosts() {
                 <strong>{post.date}</strong>
               </p>
               <FormControl>
-                <textarea
-                  readOnly={true}
-                  className="rounded-md bg-stone-200 focus:outline-none focus:ring-0"
-                  value={post.body}
-                  name="userReview"
-                  id="userReview"
-                  cols="50"
-                  rows="10"
-                ></textarea>
+                {editingPostId === post.id ? (
+                  <textarea
+                    className="rounded-md bg-stone-200 focus:outline-none focus:ring-0"
+                    value={postBody}
+                    onChange={handlePostEdit}
+                    name="userReview"
+                    id="userReview"
+                    cols="50"
+                    rows="10"
+                  ></textarea>
+                ) : (
+                  <p>{post.body}</p>
+                )}
               </FormControl>
+              {editingPostId === post.id ? (
+                <div className="flex justify-center">
+                  <Button onClick={updatePost} colorScheme="teal" size="sm">
+                    Update Post
+                  </Button>
+                </div>
+              ) : null}
             </div>
           );
         })}
