@@ -61,7 +61,7 @@ function App() {
   }, [bookData]);
 
   return (
-    <div className="flex justify-start h-[2300px] items-center flex-col ">
+    <div className="flex justify-start min-h-[2300px] items-center flex-col ">
       {showReviewForm && bookData.length > 0 && (
         <ReviewForm book={bookData[0]} onClose={handleCloseForm} />
       )}

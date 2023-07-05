@@ -15,7 +15,7 @@ export default function ShowPosts() {
   const [updated, setUpdated] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/comments").then((res) => {
+    axios.get("http://localhost:3000/comments?_limit=5").then((res) => {
       setPostData(res.data);
       console.table(res.data);
     });
